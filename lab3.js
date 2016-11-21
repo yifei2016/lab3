@@ -1,5 +1,5 @@
 window.addEventListener('load', function() {
-	console.log(event.target)
+	
 	let buttonMenu = document.getElementById('menu');
 	let drawOptions = document.getElementById('drawOptions');
 	drawOptions.style.display = 'none';
@@ -23,11 +23,23 @@ window.addEventListener('load', function() {
 	}
 			
 	let canvas = document.getElementById("myCanvas");
-	let context = canvas.getContext('2d');
-	let status = document.getElementById('status');
+	canvas.addEventListener('click',function(event){
+		let coordinate = getMousePos(canvas,event);
+		let c = new Circle(coordinate.x, coordinate.y, 50);
+		c.draw(canvas);
+	});
+	
+});
 
+function getMousePos(canvas, event) {
 
-})
+    let rect = canvas.getBoundingClientRect();
+    let x = event.clientX - rect.left;
+    let y = event.clientY - rect.top;
+    	
+    return { x: x, y: y };
+}
+
 function changeColor(){
 	let colorInput = document.getElementById('colorInput');
 	let i = document.getElementsByName('color')[0];
