@@ -12,7 +12,7 @@ window.addEventListener('load', function() {
 		}
 	});
 
-	let drawArray = document.getElementsByClassName("draw");
+	let drawArray = document.getElementById("drawOptions").children;
 	
 	for(let i=0; i<drawArray.length; i++){
 		drawArray[i].addEventListener('click', function(event){
