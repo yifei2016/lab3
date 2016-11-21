@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>lab3</title>
+		<meta charset='utf-8'>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="lab3.css">
+		
+		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script> <!-- jquery cdn-->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!-- bootrstrap javascript cdn-->
+		<script src="lab3.js"></script>
+	</head>
+	<body>
+		
+		<div class="status-bar">
+			<p id="status">sdfsfsd</p>
+		</div>
+		
+		
+		
+		<div class="main-panel">
+			<div class='con'>
+				<div class="bar-menu">
+					<button type="button" class="btn btn-info" id="menu">
+						<i class="fa fa-bars" aria-hidden="true"></i>
+					</button>
+					<div class="btn-group-vertical" role="group" aria-label="..." id='lis'>
+						<button class="btn btn-default" onclick="selectedOption(event)">rensa canvas</button>
+						<button class="btn btn-default" onclick="selectedOption(event)">rita cirkel</button>
+						<button class="btn btn-default" onclick="selectedOption(event)">rita rektangel</button>
+						<button class="btn btn-default" onclick="selectedOption(event)">rita triangel </button>
+						<button class="btn btn-default" onclick="selectedOption(event)">rita triangel </button>
+						<button class="btn btn-default" onclick="selectedOption(event)">rita polygon</button>
+						<button class="btn btn-default" onclick="selectedOption(event)">exportera till JSON</button>	
+					</div>
+				</div>
+				
+				<canvas id="myCanvas" width="500px" height="600px">Text som visas om webbläsaren inte stöder canvas-elementet</canvas>
+				
+				<div class="color-div">
+					<div class="input-group" >
+						<input type="text" class="form-control" id="colorInput" placeholder="Choose a color ">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" onclick="changeColor()">OK</button>
+						</span>
+					</div>
+					<input type="color" name="color" value="#0080ff"> 	
+				</div>				
+			</div>
+		</div>
+		
+		<div>
+			<button></button>
+		</div>
+		
+	</body>
+</html>
