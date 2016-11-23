@@ -10,6 +10,8 @@
 		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script> <!-- jquery cdn-->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!-- bootrstrap javascript cdn-->
 		<script src="circle.js"></script>
+		<script src="rectangle.js"></script>
+		<script src="triangle.js"></script>
 		<script src="lab3.js"></script>
 	</head>
 	<body>
@@ -25,12 +27,10 @@
 						<i class="fa fa-bars" aria-hidden="true"></i>
 					</button>
 					<div id='drawOptions' class="btn-group-vertical" role="group" aria-label="..." >
-						<button class="btn btn-default">rensa canvas</button>
+						<button class="btn btn-default" onclick="clearCanvas()">rensa canvas</button>
 						<button class="btn btn-default">rita cirkel</button>
 						<button class="btn btn-default">rita rektangel</button>
-						<button class="btn btn-default">rita triangel </button>
-						<button class="btn btn-default">rita triangel </button>
-						<button class="btn btn-default">rita polygon</button>
+						<button class="btn btn-default">rita triangel</button>
 						<button class="btn btn-default">exportera till JSON</button>	
 					</div>
 				</div>
@@ -45,6 +45,14 @@
 						</span>
 					</div>
 					<input type="color" name="color" value="#0080ff"> 	
+					<select>
+						<option selected>välj färg</option>
+						<option value="#ff0000">röd</option>
+						<option value="#FFFF00">gul</option>
+						<option value="#008000">grön</option>
+						<option value="#000000">svart</option>
+					</select>
+					
 				</div>				
 			</div>
 		</div>
