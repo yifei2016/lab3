@@ -11,21 +11,34 @@ window.addEventListener('load', function() {
 		}
 	});
 
-	let drawOptionsChildren = drawOptions.children;
+	let drawOptionsChildren = drawOptions.children; //menu buttons
 	let whatToDraw = "";
 	let coordinates = [];
 	
 	for(let i = 0; i < drawOptionsChildren.length; i++){
 		// where to update status bar
+		
 		drawOptionsChildren[i].addEventListener('click', function(event){
+			//trigger click events when click menu buttons
 			let selectedOption = event.target.innerHTML;
 			let statusBar = document.getElementById('status');
 			statusBar.innerHTML = selectedOption; // what to update status bar
 			whatToDraw = selectedOption.split(" ")[1];
-			coordinates = [];
+			coordinates = [];//when change mind to click next button, should update to empty
 		});
 	}
+
 			
+
+	function getMousePos(canvas, event) {
+
+		let rect = canvas.getBoundingClientRect();
+		let x = event.clientX - rect.left;
+		let y = event.clientY - rect.top;
+
+		return { x: x, y: y };
+	}
+
 	let canvas = document.getElementById("myCanvas");
 	// When to update status bar
 	canvas.addEventListener('click',function(event){
@@ -64,14 +77,7 @@ window.addEventListener('load', function() {
 
 	
 
-function getMousePos(canvas, event) {
 
-    let rect = canvas.getBoundingClientRect();
-    let x = event.clientX - rect.left;
-    let y = event.clientY - rect.top;
-    	
-    return { x: x, y: y };
-}
 
 function changeColor(){
 	let colorInput = document.getElementById('colorInput');
