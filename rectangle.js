@@ -7,7 +7,9 @@ function Rectangle(x1, y1, x2, y2){
 		let ct = canvas.getContext('2d');
 		let width = Math.sqrt( (this.x1-this.x2)*(this.x1-this.x2) + (this.y1-this.y1)*(this.y1-this.y1) );
 		let height = Math.sqrt( (this.x1-this.x1)*(this.x1-this.x1) + (this.y1-this.y2)*(this.y1-this.y2) );
-		ct.strokeRect(this.x1, this.y1, width, height);
+		ct.rect(this.x1, this.y1, width, height);
+		ct.fillStyle = "red";
+		ct.fill();
 	}
 
 }

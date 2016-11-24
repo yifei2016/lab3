@@ -28,7 +28,10 @@ window.addEventListener('load', function() {
 		});
 	}
 
-			
+	function status(str) {
+		let statusBar = document.getElementById('status');
+		statusBar.innerText = str || "";
+	}
 
 	function getMousePos(canvas, event) {
 
@@ -40,31 +43,69 @@ window.addEventListener('load', function() {
 	}
 
 	let canvas = document.getElementById("myCanvas");
+
+	canvas.addEventListener('mouseover', event => {
+		// check if we are drwaing somthing
+			// check what we are drawing 
+				// update status accordenlty
+		if(whatToDraw === "cirkel"){
+			status('välj cirkelens mittpunkten');
+		}else if(whatToDraw === "rektangel"){
+			status('välj rektabgel övre vänster punkten');
+		}else if(whatToDraw === "triangel"){
+			status('välj triangelens först punkten');
+		}
+		
+	});
+	let drawed = [];
 	// When to update status bar
 	canvas.addEventListener('click',function(event){
-
 		let coordinate = getMousePos(this,event);
-			coordinates.push(coordinate);
+		coordinates.push(coordinate);
 		if(whatToDraw === "cirkel"){
-			if(coordinates.length === 2 ){
+			if(coordinates.length === 1 ){
+				let statusBar = document.getElementById('status');
+				statusBar.innerHTML = 'Klicka för välja cirkelens radie.'
+				
+			}else if (coordinates.length === 2){
 				let d = Math.sqrt( (coordinates[0].x-coordinates[1].x)*(coordinates[0].x-coordinates[1].x) + (coordinates[0].y-coordinates[1].y)*(coordinates[0].y-coordinates[1].y) );
 				let c = new Circle(coordinates[0].x, coordinates[0].y, d);
 				c.draw(this);
+				drawed.push(c);
+				status('cirkel ritas ut');
 				coordinates = [];
 			}
 		}else if(whatToDraw === "rektangel"){
+			if(coordinates.length === 1 ){
+				let statusBar = document.getElementById('status');
+				statusBar.innerHTML = 'Klicka för välja rektangels nedre höger punkten.'
+				
+			}
 			if(coordinates.length === 2 ){
 				let rectangle = new Rectangle(coordinates[0].x, coordinates[0].y, coordinates[1].x, coordinates[1].y);
 				rectangle.draw(this);
+				status('rektagel ritas ut');
 				coordinates = [];
 			}
 		}else if(whatToDraw === "triangel"){
-			if(coordinates.length === 3 ){
+			if(coordinates.length === 1 ){
+				let statusBar = document.getElementById('status');
+				statusBar.innerHTML = 'Klicka för välja triangles den andra punkten.'
+				
+			}
+			else if(coordinates.length === 2 ){
+				let statusBar = document.getElementById('status');
+				statusBar.innerHTML = 'Klicka för välja triangles den tredje punkten.'
+				
+			}
+			else if(coordinates.length === 3 ){
 				let triangle = new Triangle(coordinates[0].x, coordinates[0].y, coordinates[1].x, coordinates[1].y,coordinates[2].x, coordinates[2].y);
 				triangle.draw(this);
+				status('triangel ritas ut');
 				coordinates = [];
 			}
 		}
+		
 	});
 
 	let select = document.getElementsByTagName('select')[0];
