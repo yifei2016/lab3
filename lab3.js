@@ -57,8 +57,9 @@ window.addEventListener('load', function() {
 		}
 		
 	});
-	let drawed = [];
+	//let drawed = [];
 	// When to update status bar
+	let ctx = canvas.getContext("2d");
 	canvas.addEventListener('click',function(event){
 		let coordinate = getMousePos(this,event);
 		coordinates.push(coordinate);
@@ -71,7 +72,7 @@ window.addEventListener('load', function() {
 				let d = Math.sqrt( (coordinates[0].x-coordinates[1].x)*(coordinates[0].x-coordinates[1].x) + (coordinates[0].y-coordinates[1].y)*(coordinates[0].y-coordinates[1].y) );
 				let c = new Circle(coordinates[0].x, coordinates[0].y, d);
 				c.draw(this);
-				drawed.push(c);
+				//
 				status('cirkel ritas ut');
 				coordinates = [];
 			}
@@ -90,12 +91,12 @@ window.addEventListener('load', function() {
 		}else if(whatToDraw === "triangel"){
 			if(coordinates.length === 1 ){
 				let statusBar = document.getElementById('status');
-				statusBar.innerHTML = 'Klicka för välja triangles den andra punkten.'
+				statusBar.innerHTML = 'Klicka för välja triangles den andra punkten, nu är position: x:' + getMousePos(this,event).x + ', ' + 'y:' + getMousePos(this,event).y + ' ,Viewport:x: ' + event.clientX + ', ' + 'y:' + event.clientY + ' ,antal klick: ' + coordinates.length; 
 				
 			}
 			else if(coordinates.length === 2 ){
 				let statusBar = document.getElementById('status');
-				statusBar.innerHTML = 'Klicka för välja triangles den tredje punkten.'
+				statusBar.innerHTML = 'Klicka för välja triangles den tredje punkten, nu är position: x:' + getMousePos(this,event).x + ', ' + 'y:' + getMousePos(this,event).y + ' ,Viewport:x: ' + event.clientX + ', ' + 'y:' + event.clientY + ' ,antal klick: ' + coordinates.length; 
 				
 			}
 			else if(coordinates.length === 3 ){
@@ -110,6 +111,8 @@ window.addEventListener('load', function() {
 
 	let select = document.getElementsByTagName('select')[0];
 	select.addEventListener('change',function(event){
+		let input = document.getElementsByName('color')[0];
+		input.value = select.value;
 		let ctx = canvas.getContext("2d");
 		ctx.strokeStyle = select.value;
 	});
@@ -117,13 +120,17 @@ window.addEventListener('load', function() {
 });
 
 	
-
-
-
 function changeColor(){
 	let colorInput = document.getElementById('colorInput');
 	let i = document.getElementsByName('color')[0];
 	i.value = colorInput.value;
+	let newOption = document.createElement('option');
+	newOption.text = colorInput.value;
+	newOption.value = colorInput.value;
+	//newOption.innerHTML = colorInput.value;
+	let select = document.getElementsByTagName('select')[0];
+	//select.appendChild(newOption);
+	select.add(newOption);
 	let status = document.getElementById('status');
 	status.innerHTML = 'You picked color with '+  i.value;
 }

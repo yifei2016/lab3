@@ -12,7 +12,10 @@ function Triangle(x1, y1, x2, y2, x3, y3){
 		c.lineTo(this.x2, this.y2); // lägg till linje mellan (50,10) och (100,10)
 		c.lineTo(this.x3, this.y3);  // lägg till linje
 		c.closePath();     // bara om man vill ha en sammanhängande figur
-		c.stroke();        // rita alla linjer i path
+		c.stroke();  
+		let select = document.getElementsByTagName('select')[0];      // rita alla linjer i path
+		c.fillStyle = select.value;
+		c.fill();
 
 	}
 }
