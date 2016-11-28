@@ -17,7 +17,7 @@ window.addEventListener('load', function() {
 
 	let canvas = document.getElementById("myCanvas");
 	let ctx = canvas.getContext("2d");
-	
+
 	let select = document.getElementsByTagName('select')[0];
 	select.addEventListener('change',function(event){
 		let input = document.getElementsByName('color')[0];
@@ -147,15 +147,12 @@ function changeColor(){
 	let colorInput = document.getElementById('colorInput');
 	let color = document.getElementsByName('color')[0];
 	color.value = colorInput.value;
-	
 	let newOption = document.createElement('option');
 	newOption.text = colorInput.value;
 	newOption.value = colorInput.value;
-	//newOption.innerHTML = colorInput.value;
 	let select = document.getElementsByTagName('select')[0];
 	//select.appendChild(newOption);
 	select.add(newOption);
-	//let status = document.getElementById('status');
 	status('You picked color with '+  i.value);
 }
 function clearCanvas(){
