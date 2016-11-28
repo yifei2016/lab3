@@ -5,6 +5,7 @@ function Triangle(x1, y1, x2, y2, x3, y3){
 	this.y2 = y2;
 	this.x3 = x3;
 	this.y3 = y3;
+	
 	this.draw = function(canvas){
 		let c = canvas.getContext('2d');
 		c.beginPath();     // börja en path
@@ -13,9 +14,9 @@ function Triangle(x1, y1, x2, y2, x3, y3){
 		c.lineTo(this.x3, this.y3);  // lägg till linje
 		c.closePath();     // bara om man vill ha en sammanhängande figur
 		c.stroke();  
-		let select = document.getElementsByTagName('select')[0];      // rita alla linjer i path
-		c.fillStyle = select.value;
-		c.fill();
+		//let select = document.getElementsByTagName('select')[0];  // rita alla linjer i path
+		//c.fillStyle = select.value;
+		//c.fill();
 
 	}
 }

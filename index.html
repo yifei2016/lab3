@@ -31,8 +31,10 @@
 						<button class="btn btn-default">rita cirkel</button>
 						<button class="btn btn-default">rita rektangel</button>
 						<button class="btn btn-default">rita triangel</button>
-						<button class="btn btn-default">exportera till JSON</button>	
+						<button class="btn btn-default">Avbryt handling</button>
+						<button class="btn btn-default" id="export">exportera till JSON</button>	
 					</div>
+
 				</div>
 				
 				<canvas id="myCanvas" width="400px" height="400px">Text som visas om webbläsaren inte stöder canvas-elementet</canvas>
@@ -52,9 +54,11 @@
 						<option value="#008000">grön</option>
 						<option value="#000000">svart</option>
 					</select>
-					
-				</div>				
+					<input type="text" id="jsonInput" value="">	
+				</div>	
+
 			</div>
+
 		</div>
 		
 
