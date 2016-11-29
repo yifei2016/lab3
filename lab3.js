@@ -66,9 +66,9 @@ window.addEventListener('load', function() {
 		return { x: x, y: y };
 	}
     let type = '';
-   let drawed= [];
+    let drawed= [];
 	canvas.addEventListener('click',function(event){
-		let coordinate = getMousePos(this,event);
+		let coordinate = getMousePos(this,event);//who call , this will be who, but only can be object
 		coordinates.push(coordinate);
 
 		if(whatToDraw === "cirkel"){
