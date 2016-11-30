@@ -130,17 +130,14 @@ window.addEventListener('load', function() {
 		drawOptionsChildren[i].addEventListener('click', function(event){
 			//trigger click events when click menu buttons   where to update status bar
 			let selectedOption = event.target.innerHTML;
+
 			//let statusBar = document.getElementById('status');
 			status(selectedOption); // what to update status bar
 			whatToDraw = selectedOption.split(" ")[1];
 			coordinates = [];//when change mind to click next button, should update to empty
+
 		});
 	}
-
-	
- 	//let okButton = document.getElementById('okButton');
-
-
 
 	let expoteraButton = document.getElementById('export');
 	expoteraButton.addEventListener('click',function(event){
@@ -151,19 +148,49 @@ window.addEventListener('load', function() {
 	});
 });
 
-/*function isHexaColor(sNum){
-  return (typeof sNum === "string") && sNum.length === 6 
-         && ! isNaN( parseInt(sNum, 16) );
-}*/
+function isHexaColor(sNum){
+	let noHashValue = sNum.substring(1,sNum.length);
+  	return (typeof noHashValue === "string") && noHashValue.length === 6 
+         && ! isNaN( parseInt(noHashValue, 16) );
+}
+function checkColorInput(text) {
+	let okButton = document.getElementById('okButton'); 
+	let warning = document.getElementById('warning');
+	if(isHexaColor(text)){
+		okButton.disabled = false;
+		warning.innerHTML ='';
+	}
+	else{
+		okButton.disabled = true;
+		warning.innerHTML = 'please input valid hexadecimal color value';
+		//alert ('please input valid hexadecimal color value');
+	}
+}
 
-
+function changeColor(){
+	let colorInput = document.getElementById('colorInput');
+	let color = document.getElementsByName('color')[0];
+	color.value = colorInput.value;
+	let newOption = document.createElement('option');
+	newOption.text = colorInput.value;
+	newOption.value = colorInput.value;
+	let select = document.getElementsByTagName('select')[0];
+	select.appendChild(newOption);
+	//select.add(newOption);
+	let canvas = document.getElementById("myCanvas");
+	let ctx = canvas.getContext("2d");
+	ctx.strokeStyle = colorInput.value;
+	status('Du har plockat ut färg '+  colorInput.value);
+	colorInput.value = '';
+	colorInput.placeholder = "Välj en färg";
+}
 
 function status(str="") {
 		let statusBar = document.getElementById('status');
 		statusBar.innerText = str;
-	}
+}
 
-function validateColor(colorInput){
+/*function validateColor(colorInput){
 		//let colorInput = document.getElementById('colorInput');
 		colorInput = colorInput.toUpperCase();
 		let allowed = ['A','B','C','D','E','F','0','1','2','3','4','5','6','7','8','9'];
@@ -175,6 +202,7 @@ function validateColor(colorInput){
 						count++;
 						break;
 					}
+
 				}
 			}
 		}
@@ -185,8 +213,8 @@ function validateColor(colorInput){
 			return false;
 		}
 	}
-
-function changeColor(){
+*/
+/*function changeColor(){
 	let colorInput = document.getElementById('colorInput');
 	if(colorInput.value.length ==7 && colorInput.value != undefined){
 		if(validateColor(colorInput.value)===true){
@@ -211,13 +239,9 @@ function changeColor(){
 		alert('Du har valt felaktig color format, det måste vara en hexadecimal format.');
 	}
 	
-	//}
-	//else {
-		//alert ('please input valid hexadecimal color value');
-	//}
 }
 
-
+*/
 
 function clearCanvas(){
 	let canvas = document.getElementById('myCanvas');

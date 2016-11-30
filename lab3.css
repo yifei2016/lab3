@@ -2,6 +2,7 @@ body{
 	background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTugsDXau02kn6coUN5nRYUGgXHxR0pCGQvKKZzCCLs1ba9pzhF);
 	background-repeat: no-repeat;
 	background-size:cover;
+	padding: 40px 40px 40px 40px;
 }
 
 .main-panel{
@@ -28,10 +29,7 @@ body{
 	flex-direction: column;
 	width:30%;
 }
-body{
-	padding: 40px 40px 40px 40px;
 
-}
 .status-bar{
 	border:1px solid green;
 	margin-bottom: 30px;

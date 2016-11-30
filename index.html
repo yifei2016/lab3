@@ -41,11 +41,12 @@
 				
 				<div class="color-div">
 					<div class="input-group" >
-						<input type="text" class="form-control" id="colorInput" placeholder="Choose a color">
+						<input type="text" class="form-control" id="colorInput" onkeyup="checkColorInput(this.value)" placeholder="Choose a color">
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="button" onclick="changeColor()">OK</button>
+							<button class="btn btn-default" id= "okButton" type="button" onclick="changeColor()">OK</button>
 						</span>
 					</div>
+					<small id="warning"  style="color:red;"></small>
 					<input type="color" name="color" value="#0080ff">  	
 					<select>
 						<option selected>välj färg</option>
