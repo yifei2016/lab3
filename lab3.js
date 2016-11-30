@@ -17,7 +17,6 @@ window.addEventListener('load', function() {
 
 	let canvas = document.getElementById("myCanvas");
 	let ctx = canvas.getContext("2d");
-
 	let select = document.getElementsByTagName('select')[0];
 	select.addEventListener('change',function(event){
 		let input = document.getElementsByName('color')[0];
@@ -26,22 +25,13 @@ window.addEventListener('load', function() {
 		ctx.strokeStyle = select.value;
 	});	
 
-	function status(str="") {
+	function status(str='') {
 		let statusBar = document.getElementById('status');
-		statusBar.innerText = str;
+		statusBar.innerHTML = str;
+
 	}
 
-	for(let i = 0; i < drawOptionsChildren.length; i++){
-		drawOptionsChildren[i].addEventListener('click', function(event){
-			//trigger click events when click menu buttons   where to update status bar
-			let selectedOption = event.target.innerHTML;
-			//let statusBar = document.getElementById('status');
-			status(selectedOption); // what to update status bar
-			whatToDraw = selectedOption.split(" ")[1];
-			coordinates = [];//when change mind to click next button, should update to empty
-		});
-	}
-
+	
 	canvas.addEventListener('mouseover', event => {
 		// check if we are drwaing somthing  check what we are drawing 
 		// update status accordingly
@@ -67,6 +57,8 @@ window.addEventListener('load', function() {
 	}
     let type = '';
     let drawed= [];
+
+
 	canvas.addEventListener('click',function(event){
 		let coordinate = getMousePos(this,event);//who call , this will be who, but only can be object
 		coordinates.push(coordinate);
@@ -134,6 +126,22 @@ window.addEventListener('load', function() {
 
 	});	
 
+	for(let i = 0; i < drawOptionsChildren.length; i++){
+		drawOptionsChildren[i].addEventListener('click', function(event){
+			//trigger click events when click menu buttons   where to update status bar
+			let selectedOption = event.target.innerHTML;
+			//let statusBar = document.getElementById('status');
+			status(selectedOption); // what to update status bar
+			whatToDraw = selectedOption.split(" ")[1];
+			coordinates = [];//when change mind to click next button, should update to empty
+		});
+	}
+
+	
+ 	//let okButton = document.getElementById('okButton');
+
+
+
 	let expoteraButton = document.getElementById('export');
 	expoteraButton.addEventListener('click',function(event){
 		let expoterad = JSON.stringify(drawed);//it is a list with all drawed objects
@@ -143,18 +151,74 @@ window.addEventListener('load', function() {
 	});
 });
 
+/*function isHexaColor(sNum){
+  return (typeof sNum === "string") && sNum.length === 6 
+         && ! isNaN( parseInt(sNum, 16) );
+}*/
+
+
+
+function status(str="") {
+		let statusBar = document.getElementById('status');
+		statusBar.innerText = str;
+	}
+
+function validateColor(colorInput){
+		//let colorInput = document.getElementById('colorInput');
+		colorInput = colorInput.toUpperCase();
+		let allowed = ['A','B','C','D','E','F','0','1','2','3','4','5','6','7','8','9'];
+		let count = 0;
+		if(colorInput.charAt(0)==='#'){
+			for(let i = 1;i < colorInput.length; i++){
+				for(let j = 0; j < allowed.length; j++){
+					if(colorInput[i] === allowed[j]){
+						count++;
+						break;
+					}
+				}
+			}
+		}
+		if(count === 6){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
 function changeColor(){
 	let colorInput = document.getElementById('colorInput');
-	let color = document.getElementsByName('color')[0];
-	color.value = colorInput.value;
-	let newOption = document.createElement('option');
-	newOption.text = colorInput.value;
-	newOption.value = colorInput.value;
-	let select = document.getElementsByTagName('select')[0];
-	//select.appendChild(newOption);
-	select.add(newOption);
-	status('You picked color with '+  i.value);
+	if(colorInput.value.length ==7 && colorInput.value != undefined){
+		if(validateColor(colorInput.value)===true){
+			
+			let color = document.getElementsByName('color')[0];
+			//if(isHexaColor(colorInput.value) === true){
+			color.value = colorInput.value;
+			let newOption = document.createElement('option');
+			newOption.text = colorInput.value;
+			newOption.value = colorInput.value;
+			let select = document.getElementsByTagName('select')[0];
+			select.appendChild(newOption);
+			colorInput.value = '';
+			colorInput.placeholder = "Välj en färg";
+			//select.add(newOption);
+			let canvas = document.getElementById("myCanvas");
+			let ctx = canvas.getContext("2d");
+			ctx.strokeStyle = colorInput.value;
+			status('Du har plockat ut färg '+  color.value);
+		}
+	}else{
+		alert('Du har valt felaktig color format, det måste vara en hexadecimal format.');
+	}
+	
+	//}
+	//else {
+		//alert ('please input valid hexadecimal color value');
+	//}
 }
+
+
+
 function clearCanvas(){
 	let canvas = document.getElementById('myCanvas');
 	let ctx = canvas.getContext("2d");
