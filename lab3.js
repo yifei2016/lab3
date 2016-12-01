@@ -38,13 +38,13 @@ window.addEventListener('load', function() {
 		if(whatToDraw === "cirkel"){
 			status('välj cirkelens mittpunkten');
 		}else if(whatToDraw === "rektangel"){
-			status('välj rektangel övre vänster punkten');
+			status('välj rektangels övre vänstra punkt');
 		}else if(whatToDraw === "triangel"){
 			status('välj triangelens först punkten');
 		}else if (whatToDraw === 'till') {
-			status('du kommer att expotera objects till JSON');
+			status('du kommer att expotera object till JSON');
 		}else if(whatToDraw === 'handling'){
-			status('du kommer att sluta rita');
+			status('Det du ritade ska avbröts nu.');
 		}
 
 	});
@@ -55,8 +55,19 @@ window.addEventListener('load', function() {
 		let y = event.clientY - rect.top;
 		return { x: x, y: y };
 	}
-    let type = '';
+    //let type = '';
     let drawed= [];
+	for(let i = 0; i < drawOptionsChildren.length; i++){
+		drawOptionsChildren[i].addEventListener('click', function(event){
+			//trigger click events when click menu buttons   where to update status bar
+			let selectedOption = event.target.innerHTML;
+
+			//let statusBar = document.getElementById('status');
+			status(selectedOption); // what to update status bar
+			whatToDraw = selectedOption.split(" ")[1];//substring
+			coordinates = [];//when change mind to click next button, should update to empty
+		});
+	}
 
 
 	canvas.addEventListener('click',function(event){
@@ -71,31 +82,31 @@ window.addEventListener('load', function() {
 				let d = Math.sqrt( (coordinates[0].x-coordinates[1].x)*(coordinates[0].x-coordinates[1].x) + (coordinates[0].y-coordinates[1].y)*(coordinates[0].y-coordinates[1].y) );
 				let c = new Circle(coordinates[0].x, coordinates[0].y, d);
 				c.draw(this);
-				status('cirkel ritas ut');
+				status('cirkel har ritas ut');
 				let object = {
 					type: 'circle',
 					color: ctx.strokeStyle,
 					coordinates:coordinates
 				};
 				drawed.push(object);
-				type = whatToDraw;
+				//type = whatToDraw;
 				coordinates = [];
 			}
 		}else if(whatToDraw === "rektangel"){
 			if(coordinates.length === 1 ){
 				//let statusBar = document.getElementById('status');
-				status('Klicka för välja rektangels nedre höger punkten, nu är position: x:' + getMousePos(this,event).x + ', ' + 'y: ' + getMousePos(this,event).y + ' ,Viewport:x: ' + event.clientX + ', ' + 'y:' + event.clientY + ' ,antal klick: ' + coordinates.length);	
+				status('Klicka för att välja rektangels nedre högra punkten, nu är position: x:' + getMousePos(this,event).x + ', ' + 'y: ' + getMousePos(this,event).y + ' ,Viewport:x: ' + event.clientX + ', ' + 'y:' + event.clientY + ' ,antal klick: ' + coordinates.length);	
 			}else if(coordinates.length === 2 ){
 				let rectangle = new Rectangle(coordinates[0].x, coordinates[0].y, coordinates[1].x, coordinates[1].y);
 				rectangle.draw(this);
-				status('rektagel ritas ut');
+				status('rektagel har ritas ut');
 				let object = {
 					type: 'rectangle',
 					color: ctx.strokeStyle,
 					coordinates:coordinates
 				};
 				drawed.push(object);
-				type = whatToDraw;
+				//type = whatToDraw;
 				coordinates = [];
 			}
 		}else if(whatToDraw === "triangel"){
@@ -126,19 +137,7 @@ window.addEventListener('load', function() {
 
 	});	
 
-	for(let i = 0; i < drawOptionsChildren.length; i++){
-		drawOptionsChildren[i].addEventListener('click', function(event){
-			//trigger click events when click menu buttons   where to update status bar
-			let selectedOption = event.target.innerHTML;
-
-			//let statusBar = document.getElementById('status');
-			status(selectedOption); // what to update status bar
-			whatToDraw = selectedOption.split(" ")[1];
-			coordinates = [];//when change mind to click next button, should update to empty
-
-		});
-	}
-
+	
 	let expoteraButton = document.getElementById('export');
 	expoteraButton.addEventListener('click',function(event){
 		let expoterad = JSON.stringify(drawed);//it is a list with all drawed objects
@@ -162,7 +161,7 @@ function checkColorInput(text) {
 	}
 	else{
 		okButton.disabled = true;
-		warning.innerHTML = 'please input valid hexadecimal color value';
+		warning.innerHTML = 'Vänligen skriv in hexadecimal color värde';
 		//alert ('please input valid hexadecimal color value');
 	}
 }
@@ -179,7 +178,7 @@ function changeColor(){
 	//select.add(newOption);
 	let canvas = document.getElementById("myCanvas");
 	let ctx = canvas.getContext("2d");
-	ctx.strokeStyle = colorInput.value;
+	ctx.strokeStyle = color.value;
 	status('Du har plockat ut färg '+  colorInput.value);
 	colorInput.value = '';
 	colorInput.placeholder = "Välj en färg";
