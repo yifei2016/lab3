@@ -15,53 +15,52 @@
 		<script src="lab3.js"></script>
 	</head>
 	<body>
-		
 		<div class="status-bar">
 			<p id="status"></p>
 		</div>
 	
-		<div class="main-panel">
-			<div class='con'>
-				<div class="bar-menu">
-					<button type="button" class="btn btn-info" id="menu">
-						<i class="fa fa-bars" aria-hidden="true"></i>
-					</button>
-					<div id='drawOptions' class="btn-group-vertical" role="group" aria-label="..." >
-						<button class="btn btn-default" onclick="clearCanvas()">rensa canvas</button>
-						<button class="btn btn-default">rita cirkel</button>
-						<button class="btn btn-default">rita rektangel</button>
-						<button class="btn btn-default">rita triangel</button>
-						<button class="btn btn-default">Avbryt handling</button>
-						<button class="btn btn-default" id="export">exportera till JSON</button>	
-					</div>
-
+		<div id="next">
+			<div id="allButton">
+				<div class="buttons">
+					<button type="button" class="btn btn-success">rita cirkel</button>
+					<button type="button" class="btn btn-primary">rita rektangel</button>
+					<button type="button" class="btn btn-info">rita triangel</button>
 				</div>
-				
-				<canvas id="myCanvas" width="400px" height="400px">Text som visas om webbläsaren inte stöder canvas-elementet</canvas>
-				
-				<div class="color-div">
-					<div class="input-group" >
-						<input type="text" class="form-control" id="colorInput" onkeyup="checkColorInput(this.value)" placeholder="Choose a color">
-						<span class="input-group-btn">
-							<button class="btn btn-default" id="okButton" type="button" onclick="changeColor()">OK</button>
-						</span>
-					</div>
-					<small id="warning"  style="color:red;"></small>
-					<input type="color" name="color" value="#0080ff">  	
-					<select>
-						<option selected>välj färg</option>
-						<option value="#ff0000">röd</option>
-						<option value="#FFFF00">gul</option>
-						<option value="#008000">grön</option>
-						<option value="#000000">svart</option>
-					</select>
-					<input type="text" id="jsonInput" value="">
-				</div>	
-
+				<button type="button" class="btn btn-info" id="menu">
+					<i class="fa fa-bars" aria-hidden="true"></i>
+				</button>
+				<div id='drawOptions' class="btn-group-vertical" role="group" aria-label="..." >
+					<button class="btn btn-default" id="clear">rensa canvas</button>
+					<button class="btn btn-default">rita cirkel</button>
+					<button class="btn btn-default">rita rektangel</button>
+					<button class="btn btn-default">rita triangel</button>
+					<button class="btn btn-default">Avbryt handling</button>
+					<button class="btn btn-default" id="export">exportera till JSON</button>	
+				</div>
 			</div>
+				
+			<canvas id="myCanvas" width="400px" height="400px">Text som visas om webbläsaren inte stöder canvas-elementet</canvas>
+			<div class="color-div">
+				<div class="input-group" >
+					<input type="text" class="form-control" id="colorInput" onkeyup="checkColorInput(this.value)" placeholder="Choose a color">
+					<span class="input-group-btn">
+						<button class="btn btn-default" id="okButton" type="button" onclick="changeColor()">OK</button>
+					</span>
+				</div>
+				<small id="warning"  style="color:red;"></small>
+				<input type="color" name="color" value="#0080ff">  	
+				<select>
+					<option selected>välj färg</option>
+					<option value="#ff0000">röd</option>
+					<option value="#FFFF00">gul</option>
+					<option value="#008000">grön</option>
+					<option value="#000000">svart</option>
+				</select>
+				
+			</div>	
 
 		</div>
-		
+		<textarea rows="4" cols="50" id="jsonInput" value=""></textarea>
 
 	</body>
 </html>

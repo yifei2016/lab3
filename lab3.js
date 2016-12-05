@@ -69,12 +69,24 @@ window.addEventListener('load', function() {
 		});
 	}
 
+	let buttons = document.getElementsByClassName("buttons")[0];
+	buttonsChildren = buttons.children;
+	for(let i = 0; i<buttonsChildren.length;i++){
+		buttonsChildren[i].addEventListener("click",function(event){
+			let selectedOption = event.target.innerHTML;
 
+			//let statusBar = document.getElementById('status');
+			status(selectedOption); // what to update status bar
+			whatToDraw = selectedOption.split(" ")[1];
+			coordinates = [];//when change mind to click next button, should update to empty
+		});
+	}
 	canvas.addEventListener('click',function(event){
 		let coordinate = getMousePos(this,event);//who call , this will be who, but only can be object
 		coordinates.push(coordinate);
 
 		if(whatToDraw === "cirkel"){
+			
 			if(coordinates.length === 1 ){
 				//let statusBar = document.getElementById('status');
 				status('Klicka för välja cirkelens radie, nu är position: x:' + getMousePos(this,event).x + ', ' + 'y:' + getMousePos(this,event).y + ' ,Viewport:x: ' + event.clientX + ', ' + 'y:' + event.clientY + ' ,antal klick: ' + coordinates.length); 	
@@ -134,17 +146,33 @@ window.addEventListener('load', function() {
 		else if(whatToDraw === "handling"){
 			coordinates = [];
 		}	
-
+		
+		
 	});	
 
 	
 	let expoteraButton = document.getElementById('export');
 	expoteraButton.addEventListener('click',function(event){
-		let expoterad = JSON.stringify(drawed);//it is a list with all drawed objects
 		let jsonInput = document.getElementById('jsonInput');
-		jsonInput.value = expoterad;
+		if(drawed.length===0){
+			jsonInput.value = '';
+		}else{
+			let expoterad = JSON.stringify(drawed);//it is a list with all drawed objects
+			jsonInput.value = expoterad;	
+		}
+		
 		//console.log(expoterad);
 	});
+
+	let clear = document.getElementById("clear");
+	clear.addEventListener('click',function(event){
+		let canvas = document.getElementById('myCanvas');
+		let ctx = canvas.getContext("2d");
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		drawed = [];
+	});
+
+	
 });
 
 function isHexaColor(sNum){
@@ -242,11 +270,7 @@ function status(str="") {
 
 */
 
-function clearCanvas(){
-	let canvas = document.getElementById('myCanvas');
-	let ctx = canvas.getContext("2d");
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
+
 
 
 

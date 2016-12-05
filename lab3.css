@@ -5,11 +5,17 @@ body{
 	padding: 40px 40px 40px 40px;
 }
 
-.main-panel{
+#next{
 	display:flex;
-	justify-content: center;
+	margin-bottom: 30px;
 }
-
+#allButton{
+	display: flex;
+	flex-direction: column;
+}
+.buttons{
+	margin-bottom: 30px;
+}
 .con{
 	display:flex;
 	justify-content: space-around;
