@@ -172,7 +172,10 @@ window.addEventListener('load', function() {
 		drawed = [];
 	});
 
-	
+	let color = document.getElementsByName('color')[0];
+	color.addEventListener('change',function(event){
+		ctx.strokeStyle = color.value;
+	});
 });
 
 function isHexaColor(sNum){
@@ -198,15 +201,16 @@ function changeColor(){
 	let colorInput = document.getElementById('colorInput');
 	let color = document.getElementsByName('color')[0];
 	color.value = colorInput.value;
+	let canvas = document.getElementById("myCanvas");
+	let ctx = canvas.getContext("2d");
+	ctx.strokeStyle = color.value;
 	let newOption = document.createElement('option');
 	newOption.text = colorInput.value;
 	newOption.value = colorInput.value;
 	let select = document.getElementsByTagName('select')[0];
 	select.appendChild(newOption);
 	//select.add(newOption);
-	let canvas = document.getElementById("myCanvas");
-	let ctx = canvas.getContext("2d");
-	ctx.strokeStyle = color.value;
+	
 	status('Du har plockat ut färg '+  colorInput.value);
 	colorInput.value = '';
 	colorInput.placeholder = "Välj en färg";
