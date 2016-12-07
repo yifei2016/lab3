@@ -70,7 +70,7 @@ window.addEventListener('load', function() {
 	}
 
 	let buttons = document.getElementsByClassName("buttons")[0];
-	buttonsChildren = buttons.children;
+	let buttonsChildren = buttons.children;
 	for(let i = 0; i<buttonsChildren.length;i++){
 		buttonsChildren[i].addEventListener("click",function(event){
 			let selectedOption = event.target.innerHTML;
@@ -156,10 +156,11 @@ window.addEventListener('load', function() {
 		let jsonInput = document.getElementById('jsonInput');
 		if(drawed.length===0){
 			jsonInput.value = '';
+
 		}else{
 			let expoterad = JSON.stringify(drawed);//it is a list with all drawed objects
 			jsonInput.value = expoterad;	
-		}
+	}
 		
 		//console.log(expoterad);
 	});
